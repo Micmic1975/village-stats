@@ -1,9 +1,34 @@
 # Village Stats
 
-## Setup
+A Minecraft Fabric mod that displays detailed information about the nearest village.
 
-For setup instructions, please see the [Fabric Documentation page](https://docs.fabricmc.net/develop/getting-started/creating-a-project#setting-up) related to the IDE that you are using.
+## Features
+
+- Shows villager count
+- Displays professions distribution
+- Counts beds and free beds
+- Tracks workstations (POI)
+- Detects real village center using bell
+
+## Controls
+
+- Press **V** to open the stats window
+
+## Screenshots
+
+*(add later)*
+
+## Requirements
+
+- Minecraft 26.1.2
+- Fabric Loader
+
+## Installation
+
+1. Install Fabric Loader
+2. Put the mod `.jar` into the `mods` folder
+3. Launch the game
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+MIT (or your choice)

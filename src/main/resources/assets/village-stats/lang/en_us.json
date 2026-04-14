@@ -1,0 +1,15 @@
+{
+  "key.village_stats.open": "Open village stats window",
+  "key.category.village-stats.category": "Village Stats",
+  "screen.village_stats.title": "Village Stats",
+  "screen.village_stats.section.villagers": "1. Villagers",
+  "screen.village_stats.section.job_sites": "2. Workstations",
+  "screen.village_stats.section.beds": "3. Beds",
+  "screen.village_stats.label.total": "Total",
+  "screen.village_stats.label.professions": "Professions",
+  "screen.village_stats.label.none": "None",
+  "screen.village_stats.label.free": "Free",
+  "screen.village_stats.label.unknown": "Unknown",
+  "screen.village_stats.message.not_found": "Village not found",
+  "screen.village_stats.button.close": "Close"
+}

@@ -1,0 +1,15 @@
+{
+  "key.village_stats.open": "Открыть окно статистики деревни",
+  "key.category.village-stats.category": "Статистика деревни",
+  "screen.village_stats.title": "Статистика деревни",
+  "screen.village_stats.section.villagers": "1. Жители",
+  "screen.village_stats.section.job_sites": "2. Рабочие блоки",
+  "screen.village_stats.section.beds": "3. Кровати",
+  "screen.village_stats.label.total": "Всего",
+  "screen.village_stats.label.professions": "Профессии",
+  "screen.village_stats.label.none": "Нет",
+  "screen.village_stats.label.free": "Свободно",
+  "screen.village_stats.label.unknown": "Неизвестно",
+  "screen.village_stats.message.not_found": "Деревня не найдена",
+  "screen.village_stats.button.close": "Закрыть"
+}

@@ -83,3 +83,15 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+tasks.register("zipSource", Zip) {
+	archiveFileName = "village-stats-source.zip"
+	destinationDirectory = layout.buildDirectory.dir("dist")
+
+	from("src")
+	from("build.gradle")
+	from("settings.gradle")
+	from("gradle.properties")
+	from("README.md")
+	from("LICENSE")
+}

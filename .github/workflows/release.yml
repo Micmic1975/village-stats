@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,16 +41,16 @@ jobs:
           loaders: fabric
           game-versions: 26.1.2
 
-  - name: Upload to CurseForge
-    uses: Kir-Antipov/mc-publish@v3
-    with:
-      curseforge-id: 1514277
-      curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+      - name: Upload to CurseForge
+        uses: Kir-Antipov/mc-publish@v3
+        with:
+          curseforge-id: 1514277
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-      files: build/libs/*.jar
-      name: Village Stats ${{ github.ref_name }}
-      version: ${{ github.ref_name }}
+          files: build/libs/*.jar
+          name: Village Stats ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
 
-      loaders: fabric
-      game-versions: 26.1.2
-      environment: client
+          loaders: fabric
+          game-versions: 26.1.2
+          environment: client

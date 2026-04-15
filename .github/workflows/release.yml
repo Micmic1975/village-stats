@@ -1,0 +1,52 @@
+name: Release Mod
+
+on:
+  push:
+    tags:
+      - 'v*'   # например v1.0.1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Upload to Modrinth
+        uses: Kir-Antipov/mc-publish@v3
+        with:
+          modrinth-id: jIFiaesM
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: build/libs/*.jar
+          name: Village Stats ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
+
+          loaders: fabric
+          game-versions: 1.21.2
+
+      - name: Upload to CurseForge
+        uses: Kir-Antipov/mc-publish@v3
+        with:
+          curseforge-id: 1514277
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          files: build/libs/*.jar
+          name: Village Stats ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
+
+          loaders: fabric
+          game-versions: 1.21.2

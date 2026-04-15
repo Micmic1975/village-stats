@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "village-stats",
-	"version": "1.0.0",
+	"version": "${version}",
 	"name": "Village Stats",
 	"description": "Displays detailed stats of the nearest village: villagers, professions, beds, and workstations.",
 	"authors": ["Kedros"],

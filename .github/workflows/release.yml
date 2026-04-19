@@ -3,11 +3,14 @@ name: Release Mod
 on:
   push:
     tags:
-      - 'v*'   # например v1.0.1
+      - 'v*'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -19,7 +22,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '25'
 
       - name: Make gradlew executable
@@ -28,29 +31,37 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-      - name: Upload to Modrinth
+      - name: Publish to Modrinth, CurseForge and GitHub
         uses: Kir-Antipov/mc-publish@v3
         with:
           modrinth-id: jIFiaesM
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
-          files: build/libs/*.jar
-          name: Village Stats ${{ github.ref_name }}
-          version: ${{ github.ref_name }}
-
-          loaders: fabric
-          game-versions: 26.1.2
-
-      - name: Upload to CurseForge
-        uses: Kir-Antipov/mc-publish@v3
-        with:
           curseforge-id: 1514277
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
-          files: build/libs/*.jar
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-tag: ${{ github.ref_name }}
+
+          files: |
+            build/libs/!(*-@(dev|sources|javadoc)).jar
+            build/libs/*-@(dev|sources|javadoc).jar
+
           name: Village Stats ${{ github.ref_name }}
           version: ${{ github.ref_name }}
+          version-type: release
 
-          loaders: fabric
-          game-versions: 26.1.2
-          environment: client
+          changelog: |
+            Village Stats ${{ github.ref_name }}
+
+            Changes:
+            - Added broader animal tracking around the village
+            - Animals with zero count are no longer shown
+            - Separated animals into pets and other animals in the stats window
+            - Improved village animal statistics display
+
+          loaders: |
+            fabric
+
+          game-versions: |
+            26.1.2

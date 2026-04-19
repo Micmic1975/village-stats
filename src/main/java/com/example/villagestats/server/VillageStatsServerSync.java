@@ -6,9 +6,11 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.ai.village.poi.PoiTypes;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.phys.AABB;
 
@@ -67,6 +69,7 @@ public class VillageStatsServerSync {
                             0,
                             0,
                             new HashMap<>(),
+                            new HashMap<>(),
                             new HashMap<>()
                     );
 
@@ -95,6 +98,7 @@ public class VillageStatsServerSync {
                 int beds = countBedsAroundCenter(player, villageCenter);
                 int freeBeds = Math.max(beds - villagers.size(), 0);
                 Map<String, Integer> jobSites = countJobSitesAroundCenter(player, villageCenter);
+                Map<String, Integer> animals = countAnimalsAroundCenter(player, villageCenter);
 
                 VillageStatsPayload payload = new VillageStatsPayload(
                         true,
@@ -102,7 +106,8 @@ public class VillageStatsServerSync {
                         beds,
                         freeBeds,
                         professions,
-                        jobSites
+                        jobSites,
+                        animals
                 );
 
                 VillageStatsPayload lastPayload = LAST_SENT_PAYLOADS.get(playerId);
@@ -168,6 +173,31 @@ public class VillageStatsServerSync {
         return result;
     }
 
+    private static Map<String, Integer> countAnimalsAroundCenter(ServerPlayer player, BlockPos center) {
+        AABB box = new AABB(center).inflate(VILLAGE_SCAN_RADIUS);
+        Map<String, Integer> result = new HashMap<>();
+
+        for (Entity entity : player.level().getEntities(null, box)) {
+            if (!isTrackedAnimal(entity)) {
+                continue;
+            }
+
+            String id = entity.getType()
+                    .builtInRegistryHolder()
+                    .key()
+                    .identifier()
+                    .toString();
+
+            result.put(id, result.getOrDefault(id, 0) + 1);
+        }
+
+        return result;
+    }
+
+    private static boolean isTrackedAnimal(Entity entity) {
+        return entity instanceof Animal;
+    }
+
     private static boolean isWorkstationPoi(Holder<PoiType> holder) {
         return holder.is(PoiTypes.ARMORER)
                 || holder.is(PoiTypes.BUTCHER)
@@ -207,22 +237,12 @@ public class VillageStatsServerSync {
             return false;
         }
 
-        if (a.villagers() != b.villagers()) {
-            return false;
-        }
-
-        if (a.beds() != b.beds()) {
-            return false;
-        }
-
-        if (a.freeBeds() != b.freeBeds()) {
-            return false;
-        }
-
-        if (!a.professions().equals(b.professions())) {
-            return false;
-        }
-
-        return a.jobSites().equals(b.jobSites());
+        if (a.villageFound() != b.villageFound()) return false;
+        if (a.villagers() != b.villagers()) return false;
+        if (a.beds() != b.beds()) return false;
+        if (a.freeBeds() != b.freeBeds()) return false;
+        if (!a.professions().equals(b.professions())) return false;
+        if (!a.jobSites().equals(b.jobSites())) return false;
+        return a.animals().equals(b.animals());
     }
 }

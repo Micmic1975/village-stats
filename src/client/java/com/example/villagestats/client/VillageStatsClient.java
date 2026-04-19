@@ -46,6 +46,7 @@ public class VillageStatsClient implements ClientModInitializer {
 					ClientVillageStatsState.freeBeds = payload.freeBeds();
 					ClientVillageStatsState.professions = payload.professions();
 					ClientVillageStatsState.jobSites = payload.jobSites();
+					ClientVillageStatsState.animals = payload.animals();
 				})
 		);
 	}

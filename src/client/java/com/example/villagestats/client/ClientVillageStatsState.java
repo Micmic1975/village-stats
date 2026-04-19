@@ -13,4 +13,5 @@ public class ClientVillageStatsState {
 
     public static Map<String, Integer> professions = new HashMap<>();
     public static Map<String, Integer> jobSites = new HashMap<>();
+    public static Map<String, Integer> animals = new HashMap<>();
 }

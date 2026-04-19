@@ -3,7 +3,7 @@
 	"id": "village-stats",
 	"version": "${version}",
 	"name": "Village Stats",
-	"description": "Displays detailed stats of the nearest village: villagers, professions, beds, and workstations.",
+	"description": "Displays detailed stats of the nearest village: villagers, professions, beds, workstations, and animals.",
 	"authors": ["Kedros"],
 	"contact": {
 		"sources": "https://github.com/Micmic1975/village-stats",

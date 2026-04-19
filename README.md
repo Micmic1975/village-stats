@@ -1,34 +1,45 @@
-# Village Stats
+## 🇬🇧 English
+Village Stats
 
-A Minecraft Fabric mod that displays detailed information about the nearest village.
+A lightweight Fabric mod that displays detailed information about the nearest village directly in-game.
 
-## Features
-
-- Shows villager count
-- Displays professions distribution
-- Counts beds and free beds
+Features:
+- Shows total number of villagers
+- Displays profession distribution
+- Counts beds and available beds
 - Tracks workstations (POI)
-- Detects real village center using bell
+- Detects village center using the bell
+- Shows animals around the village
+- Separates pets from other animals
+- Updates in real time
 
-## Controls
+Controls:
+- Press V to open the stats window
 
-- Press **V** to open the stats window
-
-## Screenshots
-
-*(add later)*
-
-## Requirements
-
+Requirements:
 - Minecraft 26.1.2
 - Fabric Loader
+- Fabric API
 
-## Installation
+## 🇷🇺 Русский
+Статистика деревни
 
-1. Install Fabric Loader
-2. Put the mod `.jar` into the `mods` folder
-3. Launch the game
+Лёгкий мод для Minecraft (Fabric), который показывает подробную информацию о ближайшей деревне прямо в игре.
 
-## License
+Возможности:
+- Показывает количество жителей
+- Отображает распределение профессий
+- Считает общее количество кроватей и свободные места
+- Отслеживает рабочие блоки (POI)
+- Определяет центр деревни по колоколу
+- Показывает животных вокруг деревни
+- Делит животных на питомцев и остальных
+- Обновляется в реальном времени
 
-MIT (or your choice)
+Управление:
+- Нажмите V, чтобы открыть окно статистики
+
+Требования:
+- Minecraft 26.1.2
+- Fabric Loader
+- Fabric API

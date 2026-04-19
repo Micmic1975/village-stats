@@ -15,7 +15,8 @@ public record VillageStatsPayload(
         int beds,
         int freeBeds,
         Map<String, Integer> professions,
-        Map<String, Integer> jobSites
+        Map<String, Integer> jobSites,
+        Map<String, Integer> animals
 ) implements CustomPacketPayload {
 
     public static final Identifier PAYLOAD_ID =
@@ -38,6 +39,7 @@ public record VillageStatsPayload(
 
         writeStringIntMap(buf, payload.professions);
         writeStringIntMap(buf, payload.jobSites);
+        writeStringIntMap(buf, payload.animals);
     }
 
     private static VillageStatsPayload read(RegistryFriendlyByteBuf buf) {
@@ -48,8 +50,17 @@ public record VillageStatsPayload(
 
         Map<String, Integer> professions = readStringIntMap(buf);
         Map<String, Integer> jobSites = readStringIntMap(buf);
+        Map<String, Integer> animals = readStringIntMap(buf);
 
-        return new VillageStatsPayload(villageFound, villagers, beds, freeBeds, professions, jobSites);
+        return new VillageStatsPayload(
+                villageFound,
+                villagers,
+                beds,
+                freeBeds,
+                professions,
+                jobSites,
+                animals
+        );
     }
 
     private static void writeStringIntMap(RegistryFriendlyByteBuf buf, Map<String, Integer> map) {
